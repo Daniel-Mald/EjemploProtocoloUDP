@@ -14,5 +14,7 @@
     <StackPanel Margin="10">
         <Button Content="IniciarSuma" Command="{Binding SumarCommand}" ></Button>
         <TextBlock>El resultado es: <Run Text="{Binding Suma, Mode=OneWay}"></Run></TextBlock>
+
+        <TextBlock>Teiempo<Run Text="{Binding Tiempo}"></Run></TextBlock>
     </StackPanel>
 </Window>
