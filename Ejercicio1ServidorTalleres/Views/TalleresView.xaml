@@ -3,21 +3,28 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:Ejercicio1ServidorTalleres.ViewModels"
         xmlns:local="clr-namespace:Ejercicio1ServidorTalleres.Views"
         mc:Ignorable="d"
         Title="Centro Regional de cultura" Height="450" Width="800">
+    <Window.DataContext>
+        <vm:InscripcionesViewModel></vm:InscripcionesViewModel>
+    </Window.DataContext>
     <DockPanel>
-        <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Right"> Direccion ip 0.0.0.0.0</TextBlock>
-        <ItemsControl Margin="10">
+        <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Right"> Direccion ip <Run Text="{Binding IP}"></Run></TextBlock>
+        <ItemsControl Margin="10" ItemsSource="{Binding Talleres}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <UniformGrid></UniformGrid>
+                    <UniformGrid Columns="2"></UniformGrid>
                 </ItemsPanelTemplate>
                
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
+                    <DockPanel>
+                        <TextBlock Text="{Binding Nombre}" DockPanel.Dock="Top"></TextBlock>
                     <ListBox Margin="5"></ListBox>
+                    </DockPanel>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>

@@ -33,7 +33,27 @@ namespace Ejercicio1ServidorTalleres.ViewModels
 
         private void Servidor_InscripcionRealizada(object? sender, Models.DTOs.InscripcionDTO e)
         {
-
+            if(e.Taller == "Ninguno")
+            {
+                foreach (var item in talleres)
+                {
+                    var alumno = item.Alumnos.FirstOrDefault(x => x.Nombre == e.Nombre);
+                    if(alumno != null)
+                    {
+                        item.Alumnos.Remove(alumno);
+                    }
+                }
+            }
+            else
+            {
+                var taller = talleres.FirstOrDefault(x => x.Nombre == e.Taller);
+                if(taller != null)
+                {
+                    taller.Alumnos.Add(new Alumno { Nombre = e.Nombre });
+                }
+            }
+            Guardar();
+            Actualizar();
         }
 
         public void Actualizar()
@@ -44,15 +64,33 @@ namespace Ejercicio1ServidorTalleres.ViewModels
                 Talleres.Add(item);
             }
         }
+        public void Guardar()
+        {
+            var archivo = File.Create("talleres.json");
+            JsonSerializer.Serialize(archivo, talleres);
+            archivo.Close();
+        }
         public void Cargar()
         {
-
-            var archivo = File.OpenRead("talleres.json");
-            talleres = JsonSerializer.Deserialize<List<Taller>>(archivo) ??
-                new(){
+            if (File.Exists("talleres.json"))
+            {
+                var archivo = File.OpenRead("talleres.json");
+                talleres = JsonSerializer.Deserialize<List<Taller>>(archivo) ??
+                    new(){
                     new Taller(){Nombre = "Canto",Alumnos = new List<Alumno>{ }},
                     new Taller(){Nombre= "Baile", Alumnos = new List<Alumno>{ } } };
-            archivo.Close();
+                archivo.Close();
+            }
+            else
+            {
+                talleres = new()
+                {
+                     new Taller(){Nombre = "Canto",Alumnos = new List<Alumno>{ }},
+                    new Taller(){Nombre= "Baile", Alumnos = new List<Alumno>{ } }
+                };
+            }
+
+            
             
         }
 
