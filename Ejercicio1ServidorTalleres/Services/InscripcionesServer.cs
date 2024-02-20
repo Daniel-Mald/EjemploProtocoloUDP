@@ -8,6 +8,8 @@ using System.Text;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
+//using static System.Net.Mime.MediaTypeNames;
 
 namespace Ejercicio1ServidorTalleres.Services
 {
@@ -35,7 +37,11 @@ namespace Ejercicio1ServidorTalleres.Services
 
                 if (dto != null)
                 {
-                    InscripcionRealizada?.Invoke(this, dto);
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        InscripcionRealizada?.Invoke(this, dto);
+
+                    });
                 }
             }
             

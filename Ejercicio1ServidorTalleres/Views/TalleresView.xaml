@@ -23,7 +23,7 @@
                 <DataTemplate>
                     <DockPanel>
                         <TextBlock Text="{Binding Nombre}" DockPanel.Dock="Top"></TextBlock>
-                    <ListBox Margin="5"></ListBox>
+                    <ListBox Margin="5" ItemsSource="{Binding Alumnos}" DisplayMemberPath="Nombre"></ListBox>
                     </DockPanel>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
