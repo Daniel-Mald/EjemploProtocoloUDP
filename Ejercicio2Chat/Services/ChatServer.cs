@@ -15,7 +15,8 @@ namespace Ejercicio2Chat.Services
     {
         TcpListener server = null!;
         List<TcpClient> clients = new List<TcpClient>();
-
+       //public Dictionary<IPEndPoint, string> Usuarios { get; set; } = new();
+       public event EventHandler<MensajeDTO> MensajeRecibido;
         public void Iniciar()
         {
             server = new(new IPEndPoint(IPAddress.Any,9000));
@@ -56,25 +57,67 @@ namespace Ejercicio2Chat.Services
 
                 if(mensaje != null)
                 {
-                    if (mensaje.Mensaje == "**HEllO")
-                    {
+                    
+                    RelayMensaje(cliente, buffer);
+                    MensajeRecibido?.Invoke(this,mensaje);
 
-                    }
-                    else if (mensaje.Mensaje == "**BYE")
-                    {
-                        
-                    }
-                    else
-                    {
-
-                    }
                 }
             }
             clients.Remove(cliente);
         }
+        void RelayMensaje(TcpClient cliente, byte[] mensaje)
+        {
+            foreach (var item in clients)
+            {
+                if(item != cliente)//Enviar a todos menos al origen
+                {
+                    var ns = item.GetStream();
+                    ns.Write(mensaje,0, mensaje.Length);
+                    ns.Flush();
+
+                }
+            }
+        }
         public void Detener()
         {
-            if(server != null) { server.Stop(); }
+            if(server != null) 
+            { 
+                server.Stop();
+                foreach (var item in clients)
+                {
+                    item.Close();
+                }
+            }
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+//var ipe = (IPEndPoint)cliente.Client.RemoteEndPoint ?? new IPEndPoint(IPAddress.Loopback, 8001);
+//if (mensaje.Mensaje == "**HEllO")
+//{
+
+//    if (Usuarios.ContainsKey(ipe))
+//    {
+//        Usuarios.Add(ipe, mensaje.Origen);
+//    }
+//}
+//else if (mensaje.Mensaje == "**BYE")
+//{
+
+//}
+//else
+//{
+
+//}
