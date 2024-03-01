@@ -1,8 +1,8 @@
-﻿<Application x:Class="Ejercicio2Chat.App"
+﻿<Application x:Class="Ejercicio2ChatCliente.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:Ejercicio2Chat"
-             StartupUri="Views/ServerView.xaml">
+             xmlns:local="clr-namespace:Ejercicio2ChatCliente"
+             StartupUri="MainWindow.xaml">
     <Application.Resources>
          
     </Application.Resources>

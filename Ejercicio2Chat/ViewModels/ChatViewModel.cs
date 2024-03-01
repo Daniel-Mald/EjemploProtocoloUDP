@@ -10,6 +10,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace Ejercicio2Chat.ViewModels
 {
@@ -35,6 +36,20 @@ namespace Ejercicio2Chat.ViewModels
 
         private void Server_MensajeRecibido(object? sender, MensajeDTO e)
         {
+            Dispatcher.CurrentDispatcher.Invoke(() =>
+            {
+                if (e.Mensaje == "**HELLO")
+                {
+                    e.Mensaje = $"{e.Origen} se ha conectado";
+                    Usuarios.Add(e.Origen);
+                }
+                else if (e.Mensaje == "**BYE")
+                {
+                    e.Mensaje = $"{e.Origen} se ha desconectado";
+                    Usuarios.Remove(e.Origen);
+                }
+                Mensajes.Add(e);
+            });
             
         }
 

@@ -21,7 +21,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EjemploTCP1", "EjemploTCP1\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EjemploTCPCliente", "EjemploTCPCliente\EjemploTCPCliente.csproj", "{92A3E5A2-E404-4EB4-A884-9938B289EDD5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ejercicio2Chat", "Ejercicio2Chat\Ejercicio2Chat.csproj", "{8530960D-E7BE-4990-B569-EDCC2D3BAA77}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ejercicio2Chat", "Ejercicio2Chat\Ejercicio2Chat.csproj", "{8530960D-E7BE-4990-B569-EDCC2D3BAA77}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ejercicio2ChatCliente", "Ejercicio2ChatCliente\Ejercicio2ChatCliente.csproj", "{0CCD8A8A-36B8-43FC-8447-FF0375F8FE1F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +63,10 @@ Global
 		{8530960D-E7BE-4990-B569-EDCC2D3BAA77}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8530960D-E7BE-4990-B569-EDCC2D3BAA77}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8530960D-E7BE-4990-B569-EDCC2D3BAA77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0CCD8A8A-36B8-43FC-8447-FF0375F8FE1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CCD8A8A-36B8-43FC-8447-FF0375F8FE1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CCD8A8A-36B8-43FC-8447-FF0375F8FE1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CCD8A8A-36B8-43FC-8447-FF0375F8FE1F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -71,6 +77,7 @@ Global
 		{A8F9A957-A29E-4718-B649-AE172D4A1DEB} = {F1F4BE56-1E0B-41A2-9D82-483E5C6211E9}
 		{92A3E5A2-E404-4EB4-A884-9938B289EDD5} = {F1F4BE56-1E0B-41A2-9D82-483E5C6211E9}
 		{8530960D-E7BE-4990-B569-EDCC2D3BAA77} = {F1F4BE56-1E0B-41A2-9D82-483E5C6211E9}
+		{0CCD8A8A-36B8-43FC-8447-FF0375F8FE1F} = {F1F4BE56-1E0B-41A2-9D82-483E5C6211E9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ADF61228-4B9C-46BB-A5A7-D4A81A359FB2}
