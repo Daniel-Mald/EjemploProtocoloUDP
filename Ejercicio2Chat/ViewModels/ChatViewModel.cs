@@ -36,8 +36,7 @@ namespace Ejercicio2Chat.ViewModels
 
         private void Server_MensajeRecibido(object? sender, MensajeDTO e)
         {
-            Dispatcher.CurrentDispatcher.Invoke(() =>
-            {
+            
                 if (e.Mensaje == "**HELLO")
                 {
                     e.Mensaje = $"{e.Origen} se ha conectado";
@@ -49,7 +48,7 @@ namespace Ejercicio2Chat.ViewModels
                     Usuarios.Remove(e.Origen);
                 }
                 Mensajes.Add(e);
-            });
+            
             
         }
 

@@ -8,6 +8,8 @@ using System.Net.Sockets;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Windows;
+//using System.Windows;
 
 namespace Ejercicio2Chat.Services
 {
@@ -27,7 +29,7 @@ namespace Ejercicio2Chat.Services
 
         void Escuchar()
         {
-            while (server.Server.Connected)
+            while (server.Server.IsBound)
             {
                var tcpClient=  server.AcceptTcpClient();
                 clients.Add(tcpClient);
@@ -55,11 +57,15 @@ namespace Ejercicio2Chat.Services
 
                 var mensaje = JsonSerializer.Deserialize<MensajeDTO>(json);
 
-                if(mensaje != null)
+                if (mensaje != null)
                 {
-                    
+
                     RelayMensaje(cliente, buffer);
-                    MensajeRecibido?.Invoke(this,mensaje);
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        MensajeRecibido?.Invoke(this, mensaje);
+
+                    });
 
                 }
             }
