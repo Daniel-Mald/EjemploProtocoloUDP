@@ -31,6 +31,7 @@ namespace Ejercicio2ChatCliente.Services
                     Origen = equipo
                 };
                 EnviarMensaje(msg);
+                RecibirMensaje();
             }
             catch (Exception ex)
             {

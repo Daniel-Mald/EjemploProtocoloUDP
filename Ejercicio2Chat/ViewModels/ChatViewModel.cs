@@ -20,6 +20,7 @@ namespace Ejercicio2Chat.ViewModels
         public ObservableCollection<string> Usuarios { get; set; } = new();
         public ICommand IniciarServerCommand { get; set; }
         public ICommand DetenerServerCommand { get; set; }
+        public int NumeroMensaje { get; set; }
         public string IP { get; set; } = "0.0.0.0";
         public ObservableCollection<MensajeDTO> Mensajes { get; set; } = new();
         public ChatViewModel()
@@ -48,8 +49,10 @@ namespace Ejercicio2Chat.ViewModels
                     Usuarios.Remove(e.Origen);
                 }
                 Mensajes.Add(e);
-            
-            
+
+            //NumeroMensaje = Mensajes.Count - 1;
+            //PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(NumeroMensaje)));
+
         }
 
         public void DetenerCommand()

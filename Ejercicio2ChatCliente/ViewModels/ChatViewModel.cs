@@ -21,9 +21,11 @@ namespace Ejercicio2ChatCliente.ViewModels
         public ObservableCollection<MensajeDTO> Mensajes { get; set; } = new ObservableCollection<MensajeDTO>();
         public string Mensaje { get; set; } = "";
         public string IP { get; set; } = "";
+        
         public int NumeroMensaje { get; set; }
         public ICommand ConectarCommand { get; set; }
         public bool Conectado { get; set; }
+        
 
         public ChatViewModel()
         {

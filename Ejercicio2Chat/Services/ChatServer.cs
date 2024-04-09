@@ -38,7 +38,7 @@ namespace Ejercicio2Chat.Services
                 {
                     RecibirMensajes(tcpClient);
                 });
-                t.IsBackground = true;
+                t.IsBackground = true;  
                 t.Start();
             }
         }

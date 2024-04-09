@@ -9,9 +9,9 @@
     <DockPanel>
         <DockPanel DockPanel.Dock="Bottom" Margin="5,0,5,5">
             <Button DockPanel.Dock="Right" Command="{Binding EnviarCommand}">Enviar</Button>
-            <TextBox AcceptsReturn="True" Height="80" Text="{Binding Mensaje}"></TextBox>
+            <TextBox AcceptsReturn="True" Height="80" Text="{Binding Mensaje}" ></TextBox>
         </DockPanel>
-        <ListBox Margin="5" ItemsSource="{Binding Mensajes}">
+        <ListBox Margin="5" ItemsSource="{Binding Mensajes}" SelectedItem="{Binding NumeroMensaje}">
 
             <ListBox.ItemTemplate>
                 <DataTemplate>
@@ -19,7 +19,7 @@
                 Padding="5" Margin="5">
                         <StackPanel>
                             <TextBlock FontWeight="Bold" Text="{Binding Origen}"></TextBlock>
-                            <TextBlock TextAlignment="Justify" Text="{Binding Mensaje}"></TextBlock>
+                            <TextBlock FontFamily="Console" TextAlignment="Justify" Text="{Binding Mensaje}"></TextBlock>
                             <TextBlock Text="{Binding Fecha}" HorizontalAlignment="Right"></TextBlock>
                         </StackPanel>
                     </Border>
