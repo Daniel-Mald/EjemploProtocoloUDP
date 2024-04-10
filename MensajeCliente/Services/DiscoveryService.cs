@@ -13,7 +13,7 @@ namespace MensajeCliente.Services
 {
     public class DiscoveryService
     {
-        UdpClient clienteEscuchar = new();
+        UdpClient clienteEscuchar = new(7000);
         public event EventHandler<ServerModel>? ServidorRecibido;
         public DiscoveryService()
         {
@@ -22,8 +22,11 @@ namespace MensajeCliente.Services
         }
         void SolicitarServidores()//Preguntar que servidores ya estan conectados cuando se ejecute el cliente
         {
-            UdpClient _client = new();
-            _client.EnableBroadcast = true;
+            UdpClient _client = new()
+            {
+                EnableBroadcast = true
+            };
+           // _client.EnableBroadcast = true;
             _client.Send(new byte[] { 1 }, 1, new IPEndPoint(IPAddress.Broadcast, 7001));
             _client.Close();
         }

@@ -12,7 +12,7 @@ namespace MensajeServer.ViewModels
     public partial class MensajesViewModel:ObservableObject
     {
         [ObservableProperty]
-        private Mensaje? mensaje;
+        private Mensaje? mensaje = new();
 
 
         MensajesService mensajesService = new();
@@ -20,21 +20,17 @@ namespace MensajeServer.ViewModels
 
         public MensajesViewModel()
         {
-            mensajesService.Mensaje += Server_MensajeRecibido;
+            mensajesService.MensajeRecibido += MensajesService_MensajeRecibido;
         }
 
-        private void evento()
+        private void MensajesService_MensajeRecibido(object? sender, Mensaje e)
         {
-            if(e.Mensaje != null)
+            if(Mensaje != null)
             {
-                //Mensaje.ColorLetra = e.ColorLetra;
-                //Mensaje.ColorFondo = e.ColorFondo;
-
-                //Mensaje.Texto = e.Cotenedo;
                 Mensaje = e;
-
             }
-
         }
+
+        
     }
 }

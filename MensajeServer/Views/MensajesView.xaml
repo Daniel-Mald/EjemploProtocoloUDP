@@ -11,7 +11,7 @@
         <vm:MensajesViewModel></vm:MensajesViewModel>
     </UserControl.DataContext>
     <Grid Background="{Binding Mensaje.ColorFondo}">
-        <TextBlock Foreground="{Binding Mensaje.ColorLetra}" Text="{Binding Mensaje.Contenido}" 
+        <TextBlock Foreground="{Binding Mensaje.ColorLetra}" Text="{Binding Mensaje.Texto}" 
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"
                    TextAlignment="Center" FontSize="50"
