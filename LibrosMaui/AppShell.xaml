@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="LibrosMaui.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:LibrosMaui"
+    xmlns:views="clr-namespace:LibrosMaui.Views"
+    xmlns:vm="clr-namespace:LibrosMaui.ViewModels"
+    Shell.BackgroundColor="AntiqueWhite"
+    Shell.ForegroundColor="red"
+    Title="LibrosMaui">
+
+    <Shell.BindingContext>
+        <vm:LibrosViewModel></vm:LibrosViewModel>
+    </Shell.BindingContext>
+    <ShellContent
+        
+        ContentTemplate="{DataTemplate views:ListaView}"
+        Route="Lista" />
+    <ShellContent
+    
+    ContentTemplate="{DataTemplate views:EditarView}"
+    Route="Editar" />
+    <ShellContent
+    
+    ContentTemplate="{DataTemplate views:AgregarView}"
+    Route="Agregar" />
+
+</Shell>

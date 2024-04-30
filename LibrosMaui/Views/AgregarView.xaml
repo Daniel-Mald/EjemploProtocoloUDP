@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LibrosMaui.Views.AgregarView"
+             xmlns:vm="clr-namespace:LibrosMaui.ViewModels"
+             Title="AgregarView" x:DataType="vm:LibrosViewModel">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Agregar" Command="{Binding AgregarCommand}"></ToolbarItem>
+        <ToolbarItem Text="Cancelar" Command="{Binding CancelarCommand}"></ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <VerticalStackLayout>
+        <Label>Titulo:</Label>
+        <Entry Text="{Binding Libro.Titulo}"></Entry>
+        <Label>Autor</Label>
+        <Entry Text="{Binding Libro.Autor}"></Entry>
+        <Label>Url Portada</Label>
+        <Entry Keyboard="Url" Text="{Binding Libro.Portada}"></Entry>
+        <Label HorizontalTextAlignment="Center" TextColor="Red" FontSize="Small"  Text="{Binding Error}"> </Label>
+    </VerticalStackLayout>
+</ContentPage>
