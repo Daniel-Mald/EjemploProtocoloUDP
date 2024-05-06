@@ -42,9 +42,14 @@ namespace ItesrcLibrosApi.Controllers
                 return BadRequest(_resultado.Errors.Select(x => x.ErrorMessage));
             }
         }
-        [HttpGet("{fecha?}")]
-        public IActionResult Get(DateTime? fecha)
+        [HttpGet("{fecha?}/{hora?}/{minutos?}")]
+        public IActionResult Get(DateTime? fecha, int hora = 0, int minutos = 0)
         {
+            if(fecha != null)
+            {
+                fecha = new DateTime(fecha.Value.Year, fecha.Value.Month, fecha.Value.Day, hora, minutos, 0);
+
+            }
             var libros = _repository.GetAll().
                 Where(x => fecha == null || x.FechaActualizacion > fecha).
                 OrderBy(x => x.Titulo).

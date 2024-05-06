@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Json;
+using System.Reflection;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -37,12 +38,14 @@ namespace LibrosMaui.Services
                 throw new Exception(errores);
             }
         }
+        public event Action? DatosActualizados;
         public async Task GetLibros()
         {
             try
             {
                var fecha = Preferences.Get("UltimaFechaActualizacion",DateTime.MinValue);
-                var resposne = await _client.GetFromJsonAsync<List<LibroDTO>>($"api/libros/{fecha:yyyy-MM-dd}T{fecha:HH:mm:ss}");
+                bool aviso = false;
+                var resposne = await _client.GetFromJsonAsync<List<LibroDTO>>($"api/libros/{fecha:yyyy-MM-dd}/{fecha:HH}/{fecha:mm}");
                 if(resposne != null)
                 {
                     foreach (var item in resposne)
@@ -58,19 +61,25 @@ namespace LibrosMaui.Services
                                 Titulo = item.Titulo,
                             };
                             _repos.Insert(_entidad);
+                            aviso = true;
                         }
                         else 
                         {
-                            if(_entidad != null)
+                            if (_entidad != null)
                             {
-                                if (_entidad.Eliminado)
+                                if (item.Eliminado)
                                 {
                                     _repos.Delete(_entidad);
-
+                                    aviso = true;
                                 }
                                 else
                                 {
-                                    _repos.Update(_entidad);
+                                    if (item.Titulo != _entidad.Titulo || item.Autor!=_entidad.Autor|| item.Portada != _entidad.Portada)
+                                    {
+                                        _repos.Update(_entidad);
+                                        aviso = true;
+                                    }
+                                    
                                 }
                                 
                             }
@@ -79,6 +88,14 @@ namespace LibrosMaui.Services
                             
                         }
                         
+                    }
+                    if (aviso)
+                    {
+                        _ =MainThread.InvokeOnMainThreadAsync(() =>
+                        {
+
+                             DatosActualizados?.Invoke();
+                        });
                     }
                     Preferences.Set("UltimaFechaActualizacion", resposne.Max(x => x.Fecha));
                 }
@@ -90,6 +107,21 @@ namespace LibrosMaui.Services
                 
             }
         }
-
+        public async Task Eliminar(int idLibro)
+        {
+            var _response = await _client.DeleteAsync("api/libros/"+idLibro);
+            if (_response.IsSuccessStatusCode)
+            {
+                await GetLibros();
+            }
+        }
+        public async Task Editar(LibroDTO _libro)
+        {
+            var _response = await _client.PutAsJsonAsync("api/libros", _libro);
+            if(_response.IsSuccessStatusCode)
+            {
+                await GetLibros();
+            }
+        }
     }
 }

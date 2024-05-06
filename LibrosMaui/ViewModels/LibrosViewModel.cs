@@ -25,11 +25,18 @@ namespace LibrosMaui.ViewModels
         {
             
             ActualizarLibros();
-            _service.GetLibros();
+            App._librosService.DatosActualizados += _librosService_DatosActualizados;
+        }
+
+        private void _librosService_DatosActualizados()
+        {
+            ActualizarLibros();
         }
 
         [ObservableProperty]
         public LibroDTO? libro;
+        [ObservableProperty]
+        private Libro? seleccionado;
         [ObservableProperty]
         private string error = "";
         [RelayCommand]
@@ -84,6 +91,36 @@ namespace LibrosMaui.ViewModels
             {
                 Libros.Add(l);
             }
+        }
+        
+        [RelayCommand]
+        public async Task Eliminar()
+        {
+            if(Seleccionado != null)
+            {
+
+                var result = await Shell.Current.DisplayAlert("Confirmar", $"Estas seguro de eliminar el libro llamado {Seleccionado.Titulo}?", "Si", "No");
+                if (result)
+                {
+                    await _service.Eliminar(Seleccionado.Id);
+                    ActualizarLibros();
+                }
+            }
+        
+        }
+        [RelayCommand]
+        public void Editar()
+        {
+            if(Seleccionado != null)
+            {
+                Error = "";
+                Shell.Current.GoToAsync("//Editar");
+            }
+        }
+        [RelayCommand]
+        public void Guardar()
+        {
+
         }
     }
 }
